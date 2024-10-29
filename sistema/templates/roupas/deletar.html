@@ -1,0 +1,18 @@
+{% extends "../base.html" %}
+
+{% block titulo %} Deletar Anúncio{% endblock %}
+
+{% block content %}
+<!-- Linha de teste para verificar o PK do objeto -->
+<p>PK do objeto: {{ object.pk }}</p>
+
+<form action="{% url 'deletar-anuncio' object.pk %}" method="post">
+    {% csrf_token %}
+    <center>
+        <div class="alert alert-danger" role="alert">
+            <p>Tem certeza que deseja excluir o anúncio? "{{ object }}"?</p>
+        </div>
+        <input type="submit" value="Confirmar" class="btn btn-danger" />
+    </center>
+</form>
+{% endblock %}

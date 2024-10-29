@@ -1,0 +1,42 @@
+{% extends "../base.html" %}
+
+{% load static %}
+
+{% block css_local %}
+    <style>
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            {% for roupa in roupas %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    
+                    <!-- Verifica se a roupa tem uma foto associada -->
+                    {% if roupa.foto %}
+                        <img src="{{ roupa.foto.url }}" class="card-img-top" alt="{{ roupa.modelo }} Image">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Placeholder Image">
+                    {% endif %}
+
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ roupa.get_nome }}</h5>
+                        <p class="card-text">Preço: R$ {{ roupa.preco }}</p>
+                        <div class="d-grid gap-2 d-md-block">
+                            <a class="btn btn-warning" href="{% url 'editar-anuncio' roupa.pk %}" type="button">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'deletar-anuncio' roupa.pk %}" type="button">Deletar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
